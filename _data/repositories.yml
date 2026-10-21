@@ -1,14 +1,11 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - OmarElbachyr
 
 repo_description_lines_max: 2
 
+# Research repositories; cards retrieve their descriptions and statistics from GitHub.
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - OmarElbachyr/ragit
+  - OmarElbachyr/VisR-RAG-Fin
+  - OmarElbachyr/letzcross-benchmark
+  - OmarElbachyr/finqa-tablequest-bench

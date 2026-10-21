@@ -1,115 +1,91 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
 
-@book{einstein1920relativity,
-  title     = {Relativity: the Special and General Theory},
-  author    = {Einstein, Albert},
-  year      = {1920},
-  publisher = {Methuen & Co Ltd},
-  html      = {relativity.html}
-}
-
-@book{einstein1956investigations,
+@inproceedings{elbachyr2026ragit,
+  abbr        = {APSEC},
   bibtex_show = {true},
-  title       = {Investigations on the Theory of the Brownian Movement},
-  author      = {Einstein, Albert},
-  year        = {1956},
-  publisher   = {Courier Corporation},
-  preview     = {brownian-motion.gif}
+  title       = {{RAGit}: Turning Document Preprocessing into an Experimental Variable for {RAG}},
+  author      = {El Bachyr, Omar and Ezzini, Saad and Bissyandé, Tegawendé F. and Klein, Jacques},
+  booktitle   = {33rd Asia-Pacific Software Engineering Conference (APSEC), Tool Demonstration Track},
+  year        = {2026},
+  note        = {Accepted, forthcoming},
+  abstract    = {RAGit is an open-source workbench for comparing document preprocessing choices in retrieval-augmented generation. Configurable parsing, chunking, indexing, retrieval, and evaluation stages support controlled experiments, reusable artifacts, and a shared page-level evaluation across different retrieval units.},
+  arxiv       = {2610.24659},
+  html        = {https://arxiv.org/abs/2610.24659},
+  pdf         = {https://arxiv.org/pdf/2610.24659},
+  code        = {https://github.com/OmarElbachyr/ragit},
+  video       = {https://www.youtube-nocookie.com/embed/tsst-Bhfz4I},
+  selected    = {true}
 }
 
-@article{einstein1950meaning,
-  abbr        = {AJP},
+@article{elbachyr2026letzcross,
+  abbr              = {arXiv},
+  bibtex_show       = {true},
+  title             = {{LëtzCross}: A Cross-Lingual Page-Level Benchmark for Multimodal Retrieval over Luxembourgish Documents},
+  author            = {El Bachyr, Omar and Philippy, Fred and Bernardy, Laura Maria and Ezzini, Saad and Klein, Jacques and Bissyandé, Tegawendé F.},
+  journal           = {arXiv preprint arXiv:2608.21714},
+  year              = {2026},
+  month             = {August},
+  abstract          = {LëtzCross evaluates cross-lingual retrieval over Luxembourgish PDF pages using queries in English, French, German, and Luxembourgish. The benchmark combines textual and visual questions to compare text-only and page-image retrievers, and investigates how single-language and multilingual fine-tuning transfer across query languages.},
+  doi               = {10.48550/arXiv.2608.21714},
+  arxiv             = {2608.21714},
+  html              = {https://arxiv.org/abs/2608.21714},
+  pdf               = {https://arxiv.org/pdf/2608.21714},
+  code              = {https://github.com/OmarElbachyr/letzcross-benchmark},
+  google_scholar_id = {2osOgNQ5qMEC},
+  selected          = {true}
+}
+
+@inproceedings{elbachyr2026pdf,
+  abbr              = {ICSE-SEIP},
+  bibtex_show       = {true},
+  title             = {Empirical Evaluation of {PDF} Parsing and Chunking for Financial Question Answering with {RAG}},
+  author            = {El Bachyr, Omar and Song, Yewei and Ezzini, Saad and Klein, Jacques and Bissyandé, Tegawendé F. and Zilali, Anas and Ble, Ulrick and Goujon, Anne},
+  booktitle         = {Proceedings of the IEEE/ACM 48th International Conference on Software Engineering: Software Engineering in Practice},
+  pages             = {728--739},
+  year              = {2026},
+  publisher         = {Association for Computing Machinery},
+  abstract          = {This study examines how PDF parsing and chunking choices affect retrieval-augmented question answering over financial documents. Experiments on two benchmarks, including the newly introduced TableQuest dataset, compare parsers, chunking strategies, and overlap settings to guide the design of document-processing pipelines.},
+  doi               = {10.1145/3786583.3786911},
+  arxiv             = {2604.12047},
+  html              = {https://doi.org/10.1145/3786583.3786911},
+  pdf               = {https://arxiv.org/pdf/2604.12047},
+  code              = {https://github.com/OmarElbachyr/finqa-tablequest-bench},
+  google_scholar_id = {d1gkVwhDpl0C},
+  selected          = {true}
+}
+
+@article{malloy2025phished,
+  abbr        = {Electronics},
   bibtex_show = {true},
-  title       = {The meaning of relativity},
-  author      = {Einstein, Albert and Taub, AH},
-  journal     = {American Journal of Physics},
-  volume      = {18},
-  number      = {6},
-  pages       = {403--404},
-  year        = {1950},
-  publisher   = {American Association of Physics Teachers}
+  title       = {You Got Phished! Analyzing How to Provide Useful Feedback in Anti-Phishing Training with {LLM} Teacher Models},
+  author      = {Malloy, Tailia and Bernardy, Laura and El Bachyr, Omar and Philippy, Fred and Samhi, Jordan and Klein, Jacques and Bissyandé, Tegawendé F.},
+  journal     = {Electronics},
+  volume      = {14},
+  number      = {19},
+  pages       = {3872},
+  year        = {2025},
+  month       = {September},
+  publisher   = {MDPI},
+  abstract    = {This work analyzes conversations between learners and LLM teachers during anti-phishing training. Conversation embeddings help identify feedback strategies and potential biases, with recommendations for adapting instruction to learner demographics and behavior.},
+  doi         = {10.3390/electronics14193872},
+  html        = {https://www.mdpi.com/2079-9292/14/19/3872},
+  pdf         = {https://www.mdpi.com/2079-9292/14/19/3872/pdf}
 }
 
-@article{PhysRev.47.777,
-  abbr              = {PhysRev},
-  title             = {Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author            = {Einstein*†, A. and Podolsky*, B. and Rosen*, N.},
-  abstract          = {In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal           = {Phys. Rev.},
-  location          = {New Jersey},
-  volume            = {47},
-  issue             = {10},
-  pages             = {777--780},
-  numpages          = {0},
-  year              = {1935},
+@inproceedings{farah2024mcatnat,
+  abbr              = {ISCRAM},
+  bibtex_show       = {true},
+  title             = {{M-CATNAT}: A Multimodal dataset to analyze French tweets during natural disasters},
+  author            = {Farah, Badreddine and El Bachyr, Omar and Cleuziou, Guillaume and Halftermeyer, Anaïs and Gracianne, Cécile and Auclair, Samuel and Hafiane, Adel and Canals, Raphaël},
+  booktitle         = {Proceedings of the International ISCRAM Conference},
+  volume            = {21},
+  year              = {2024},
   month             = {May},
-  publisher         = aps,
-  doi               = {10.1103/PhysRev.47.777},
-  url               = {https://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html              = {https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf               = {example_pdf.pdf},
-  altmetric         = {248277},
-  dimensions        = {true},
-  google_scholar_id = {qyhmnyLat1gC},
-  video             = {https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ},
-  additional_info   = {. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
-  annotation        = {* Example use of superscripts<br>† Albert Einstein},
-  selected          = {true},
-  inspirehep_id     = {3255}
-}
-
-@article{einstein1905molekularkinetischen,
-  title     = {{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author    = {Einstein, A.},
-  journal   = {Annalen der physik},
-  volume    = {322},
-  number    = {8},
-  pages     = {549--560},
-  year      = {1905},
-  publisher = {Wiley Online Library}
-}
-
-@article{einstein1905movement,
-  abbr    = {Ann. Phys.},
-  title   = {Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author  = {Einstein, A.},
-  journal = {Ann. Phys.},
-  volume  = {17},
-  pages   = {549--560},
-  year    = {1905}
-}
-
-@article{einstein1905electrodynamics,
-  title  = {On the electrodynamics of moving bodies},
-  author = {Einstein, A.},
-  year   = {1905}
-}
-
-@article{einstein1905photoelectriceffect,
-  bibtex_show = {true},
-  abbr        = {Ann. Phys.},
-  title       = {{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}},
-  author      = {Albert Einstein},
-  abstract    = {This is the abstract text.},
-  journal     = {Ann. Phys.},
-  volume      = {322},
-  number      = {6},
-  pages       = {132--148},
-  year        = {1905},
-  doi         = {10.1002/andp.19053220607},
-  award       = {Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
-  award_name  = {Nobel Prize}
-}
-
-@book{przibram1967letters,
-  bibtex_show = {true},
-  title       = {Letters on wave mechanics},
-  author      = {Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year        = {1967},
-  publisher   = {Vision},
-  preview     = {wave-mechanics.gif},
-  abbr        = {Vision}
+  abstract          = {M-CATNAT introduces a French-language dataset for multimodal analysis of natural-disaster tweets. Its annotation approach treats tweet text, images, and their combination separately, extending crisis-management resources beyond English and supporting automated analysis of social media during disasters.},
+  doi               = {10.59297/yhq8bb90},
+  html              = {https://ojs.iscram.org/index.php/Proceedings/article/view/52},
+  pdf               = {https://ojs.iscram.org/index.php/Proceedings/article/download/52/71},
+  google_scholar_id = {u-x6o8ySG0sC}
 }
