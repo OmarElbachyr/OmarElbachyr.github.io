@@ -1,0 +1,9 @@
+/* Site-specific presentation; the theme and its back-to-top control stay intact. */
+footer[role="contentinfo"] {
+  display: none !important;
+}
+
+body,
+body.sticky-bottom-footer {
+  padding-bottom: 0;
+}
