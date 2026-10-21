@@ -19,6 +19,9 @@ See my [Google Scholar profile](https://scholar.google.com/citations?user=k9z_AS
 
 <div class="publications">
 
+{% capture publication_list %}
 {% bibliography %}
+{% endcapture %}
+{{ publication_list | replace: '>Abs</a>', '>Abstract</a>' }}
 
 </div>

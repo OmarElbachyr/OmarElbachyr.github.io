@@ -12,7 +12,7 @@ profile:
   more_info: >
     <p>TruX Research Group</p>
     <p>SnT, University of Luxembourg</p>
-selected_papers: true
+selected_papers: false # Rendered below to expand the abstract button label.
 social: true
 announcements:
   enabled: false
@@ -27,3 +27,12 @@ I am a PhD Researcher in the [Trustworthy Software (TruX) group](https://www.uni
 My research focuses on information retrieval, multimodal retrieval, visually rich documents, retrieval-augmented generation, and multilingual information retrieval. I study how document processing and retrieval methods support question answering over complex documents, including financial reports and Luxembourgish documents.
 
 You can find my work on the [Publications page]({{ '/publications/' | relative_url }}) and my academic background on the [CV page]({{ '/cv/' | relative_url }}).
+
+<h2>
+  <a href="{{ '/publications/' | relative_url }}" style="color: inherit">Selected Publications</a>
+</h2>
+
+{% capture selected_publications %}
+{% include selected_papers.liquid %}
+{% endcapture %}
+{{ selected_publications | replace: '>Abs</a>', '>Abstract</a>' }}

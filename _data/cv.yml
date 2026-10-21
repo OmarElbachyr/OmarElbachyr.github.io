@@ -73,21 +73,6 @@ cv:
           This study examines how PDF parsing and chunking choices affect retrieval-augmented question answering over financial documents. Experiments
           on two benchmarks, including the newly introduced TableQuest dataset, compare parsers, chunking strategies, and overlap settings to guide the design
           of document-processing pipelines.
-      - title: You Got Phished! Analyzing How to Provide Useful Feedback in Anti-Phishing Training with LLM Teacher Models
-        authors:
-          - Tailia Malloy
-          - Laura Bernardy
-          - Omar El Bachyr
-          - Fred Philippy
-          - Jordan Samhi
-          - Jacques Klein
-          - Tegawendé F. Bissyandé
-        publisher: Electronics
-        releaseDate: "2025"
-        url: https://www.mdpi.com/2079-9292/14/19/3872
-        summary:
-          This work analyzes conversations between learners and LLM teachers during anti-phishing training. Conversation embeddings help identify feedback
-          strategies and potential biases, with recommendations for adapting instruction to learner demographics and behavior.
       - title: "M-CATNAT: A Multimodal dataset to analyze French tweets during natural disasters"
         authors:
           - Badreddine Farah
