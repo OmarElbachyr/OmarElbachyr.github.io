@@ -1,132 +1,112 @@
 #!/usr/bin/env python
+"""Refresh the site's cached counts from its Google Scholar author profile."""
 
 import os
+from pathlib import Path
 import sys
-import yaml
+import tempfile
 from datetime import datetime
+from zoneinfo import ZoneInfo
+
+import yaml
 from scholarly import scholarly
+
+CONFIG_FILE = Path("_data/socials.yml")
+OUTPUT_FILE = Path("_data/citations.yml")
 
 
 def load_scholar_user_id() -> str:
-    """Load the Google Scholar user ID from the configuration file."""
-    config_file = "_data/socials.yml"
-    if not os.path.exists(config_file):
-        print(
-            f"Configuration file {config_file} not found. Please ensure the file exists and contains your Google Scholar user ID."
-        )
-        sys.exit(1)
-    try:
-        with open(config_file, "r") as f:
-            config = yaml.safe_load(f)
-        scholar_user_id = config.get("scholar_userid")
-        if not scholar_user_id:
-            print(
-                "No 'scholar_userid' found in the configuration file. Please add 'scholar_userid' to _data/socials.yml."
-            )
-            sys.exit(1)
-        return scholar_user_id
-    except yaml.YAMLError as e:
-        print(
-            f"Error parsing YAML file {config_file}: {e}. Please check the file for correct YAML syntax."
-        )
-        sys.exit(1)
+    with CONFIG_FILE.open(encoding="utf-8") as stream:
+        config = yaml.safe_load(stream) or {}
+    scholar_user_id = config.get("scholar_userid")
+    if not isinstance(scholar_user_id, str) or not scholar_user_id.strip():
+        raise ValueError("Add your Google Scholar user ID to _data/socials.yml.")
+    return scholar_user_id.strip()
 
 
-SCHOLAR_USER_ID: str = load_scholar_user_id()
-OUTPUT_FILE: str = "_data/citations.yml"
-
-
-def get_scholar_citations() -> None:
-    """Fetch and update Google Scholar citation data."""
-    print(f"Fetching citations for Google Scholar ID: {SCHOLAR_USER_ID}")
-    today = datetime.now().strftime("%Y-%m-%d")
-
-    # Check if the output file was already updated today
-    if os.path.exists(OUTPUT_FILE):
-        try:
-            with open(OUTPUT_FILE, "r") as f:
-                existing_data = yaml.safe_load(f)
-            if (
-                existing_data
-                and "metadata" in existing_data
-                and "last_updated" in existing_data["metadata"]
-            ):
-                print(f"Last updated on: {existing_data['metadata']['last_updated']}")
-                if existing_data["metadata"]["last_updated"] == today:
-                    print("Citations data is already up-to-date. Skipping fetch.")
-                    return
-        except Exception as e:
-            print(
-                f"Warning: Could not read existing citation data from {OUTPUT_FILE}: {e}. The file may be missing or corrupted."
-            )
-
-    citation_data = {"metadata": {"last_updated": today}, "papers": {}}
-
+def fetch_citation_counts(scholar_user_id: str) -> dict:
+    """Read profile counts without querying citing papers or estimating values."""
     scholarly.set_timeout(15)
     scholarly.set_retries(3)
-    try:
-        author = scholarly.search_author_id(SCHOLAR_USER_ID)
-        author_data = scholarly.fill(author)
-    except Exception as e:
-        print(
-            f"Error fetching author data from Google Scholar for user ID '{SCHOLAR_USER_ID}': {e}. Please check your internet connection and Scholar user ID."
-        )
-        sys.exit(1)
+    author = scholarly.search_author_id(scholar_user_id)
+    author_data = scholarly.fill(author, sections=["publications"])
+    publications = author_data.get("publications") if author_data else None
+    if not isinstance(publications, list) or not publications:
+        raise ValueError("Scholar returned no publications; keeping saved counts.")
 
-    if not author_data:
-        print(
-            f"Could not fetch author data for user ID '{SCHOLAR_USER_ID}'. Please verify the Scholar user ID and try again."
-        )
-        sys.exit(1)
+    papers = {}
+    for publication in publications:
+        publication_id = publication.get("author_pub_id") or publication.get("pub_id")
+        title = publication.get("bib", {}).get("title")
+        citations = publication.get("num_citations")
+        # Missing or malformed counts must never silently become zero.
+        if (
+            not isinstance(publication_id, str)
+            or not publication_id
+            or not isinstance(title, str)
+            or not title.strip()
+            or type(citations) is not int
+            or citations < 0
+        ):
+            raise ValueError("Scholar returned incomplete publication data; keeping saved counts.")
+        if ":" not in publication_id:
+            publication_id = f"{scholar_user_id}:{publication_id}"
+        if not publication_id.startswith(f"{scholar_user_id}:"):
+            raise ValueError("Scholar returned a publication for a different author.")
+        if publication_id in papers:
+            raise ValueError("Scholar returned duplicate publication IDs.")
+        papers[publication_id] = {
+            "title": title,
+            "year": str(publication.get("bib", {}).get("pub_year") or "Unknown Year"),
+            "citations": citations,
+        }
+        print(f"Found: {title} - Citations: {citations}")
+    return papers
 
-    if "publications" not in author_data:
-        print(f"No publications found in author data for user ID '{SCHOLAR_USER_ID}'.")
-        sys.exit(1)
 
-    for pub in author_data["publications"]:
-        try:
-            pub_id = pub.get("pub_id") or pub.get("author_pub_id")
-            if not pub_id:
-                print(
-                    f"Warning: No ID found for publication: {pub.get('bib', {}).get('title', 'Unknown')}. This publication will be skipped."
-                )
-                continue
+def get_scholar_citations() -> bool:
+    """Write only a complete, changed result; leave the cache intact on failure."""
+    scholar_user_id = load_scholar_user_id()
+    existing_data = {}
+    if OUTPUT_FILE.exists():
+        with OUTPUT_FILE.open(encoding="utf-8") as stream:
+            existing_data = yaml.safe_load(stream) or {}
+        if not isinstance(existing_data, dict):
+            raise ValueError("The citation cache must contain a YAML mapping.")
 
-            title = pub.get("bib", {}).get("title", "Unknown Title")
-            year = pub.get("bib", {}).get("pub_year", "Unknown Year")
-            citations = pub.get("num_citations", 0)
-
-            print(f"Found: {title} ({year}) - Citations: {citations}")
-
-            citation_data["papers"][pub_id] = {
-                "title": title,
-                "year": year,
-                "citations": citations,
-            }
-        except Exception as e:
-            print(
-                f"Error processing publication '{pub.get('bib', {}).get('title', 'Unknown')}': {e}. This publication will be skipped."
-            )
-
-    # Compare new data with existing data
-    if existing_data and existing_data.get("papers") == citation_data["papers"]:
+    print(f"Fetching citations for Google Scholar ID: {scholar_user_id}")
+    # Always fetch, including manual reruns on a day that already has an update.
+    papers = fetch_citation_counts(scholar_user_id)
+    if existing_data.get("papers") == papers:
         print("No changes in citation data. Skipping file update.")
-        return
+        return False
 
+    citation_data = {
+        "metadata": {
+            "last_updated": datetime.now(ZoneInfo("Europe/Luxembourg")).date().isoformat()
+        },
+        "papers": papers,
+    }
+    temporary_path = None
     try:
-        with open(OUTPUT_FILE, "w") as f:
-            yaml.dump(citation_data, f, width=1000, sort_keys=True)
-        print(f"Citation data saved to {OUTPUT_FILE}")
-    except Exception as e:
-        print(
-            f"Error writing citation data to {OUTPUT_FILE}: {e}. Please check file permissions and disk space."
-        )
-        sys.exit(1)
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=OUTPUT_FILE.parent, delete=False
+        ) as stream:
+            temporary_path = Path(stream.name)
+            yaml.safe_dump(
+                citation_data, stream, allow_unicode=True, width=1000, sort_keys=True
+            )
+        os.replace(temporary_path, OUTPUT_FILE)
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+    print(f"Citation data saved to {OUTPUT_FILE}")
+    return True
 
 
 if __name__ == "__main__":
     try:
         get_scholar_citations()
-    except Exception as e:
-        print(f"Unexpected error: {e}")
+    except Exception as error:
+        print(f"Citation update failed: {error}", file=sys.stderr)
         sys.exit(1)

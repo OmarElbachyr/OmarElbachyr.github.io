@@ -102,7 +102,7 @@ Here we will give you some tips on how to customize the website. One important t
     - [Supported analytics providers](#supported-analytics-providers)
     - [How it integrates with analytics](#how-it-integrates-with-analytics)
     - [For developers](#for-developers)
-  - [Setting up a Personal Access Token (PAT) for Google Scholar Citation Updates](#setting-up-a-personal-access-token-pat-for-google-scholar-citation-updates)
+  - [Automatic Google Scholar citation updates](#automatic-google-scholar-citation-updates)
     - [Why is a PAT required?](#why-is-a-pat-required)
     - [How to set up the PAT](#how-to-set-up-the-pat)
 
@@ -1577,44 +1577,19 @@ For more API details, see [Vanilla Cookie Consent documentation](https://cookiec
 
 ---
 
-## Setting up a Personal Access Token (PAT) for Google Scholar Citation Updates
+## Automatic Google Scholar citation updates
 
-> [!TIP]
-> After setting up al-folio you may want to run `python3 bin/update_scholar_citations.py` to fill the `_data/citations.yml` file with your Google Scholar citation counts. The script needs the `scholarly` package from [`requirements.txt`](../requirements.txt) (`python3 -m pip install scholarly`).
+The [citation workflow](../.github/workflows/update-citations.yml) checks the Scholar profile configured in [`_data/socials.yml`](../_data/socials.yml) on **Monday at 08:00** and **Friday at 18:00**, using the `Europe/Luxembourg` timezone. GitHub follows Luxembourg's clock changes; scheduled jobs may start late. The workflow must be on the default branch with GitHub Actions enabled.
 
-This project includes an automated workflow to update the citation counts for your publications using Google Scholar.
-The workflow commits changes to `_data/citations.yml` directly to the `main` branch.
-By default, the `GITHUB_TOKEN` will be used to commit the changes.
-However, this token does not have permission to trigger subsequent workflows, such as the site rebuild workflow.
-In order to deploy the changes from `main`, you can manually trigger the `deploy` workflow.
+The updater reads per-paper citation counts from Google Scholar. Changed data is saved to [`_data/citations.yml`](../_data/citations.yml), committed by the workflow, and deployed by explicitly dispatching `deploy.yml`. This uses the built-in `GITHUB_TOKEN` with `contents: write` and `actions: write`; no personal access token is needed. Repository rules must permit the workflow to push to the branch. See [GitHub's workflow-trigger documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
 
-> [!TIP]
-> To ensure that these commits can trigger further GitHub Actions workflows (such as site rebuilds), you can use a Personal Access Token (PAT) instead of the default GitHub Actions token.
-> If you have set up a PAT, citation updates will trigger further workflows (such as site rebuilds) after committing changes. In order to run the action with a PAT, you need to uncomment the following lines from the workflow file (`update-citations.yml`):
->
-> ```yaml
-> with:
->   token: ${{ secrets.PAT }}
-> ```
+Failed, empty, or malformed responses leave saved counts untouched and fail the workflow visibly. Scholar can block automated requests. Retry through **Actions → Update Google Scholar Citations → Run workflow**; manual reruns always fetch fresh data. Unchanged results do not create commits or rebuilds.
 
-### Why is a PAT required?
+Each visible citation badge requires the matching `google_scholar_id` in [`_bibliography/papers.bib`](../_bibliography/papers.bib). The updater does not estimate missing counts, import paper metadata, or change publication selection and buttons.
 
-GitHub restricts the default `GITHUB_TOKEN` from triggering other workflows when a commit is made from within a workflow. Using a PAT overcomes this limitation and allows for full automation.
+For a local check:
 
-### How to set up the PAT
-
-1. **Create a Personal Access Token**
-   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
-   - Click "Generate new token" (classic or fine-grained).
-   - Grant at least the following permissions:
-     - `repo` (for classic tokens if repo is private), `public_repo` (for classic tokens if repo is public) or `contents: read/write` (for fine-grained tokens)
-   - Save the token somewhere safe.
-
-2. **Add the PAT as a repository secret**
-   - Go to your repository on GitHub.
-   - Navigate to `Settings` > `Secrets and variables` > `Actions` > `New repository secret`.
-   - Name the secret `PAT` (must match the name used in the workflow).
-   - Paste your PAT and save.
-
-3. **Workflow usage**
-   The workflow `.github/workflows/update-citations.yml` uses this PAT to commit updates to `_data/citations.yml`.
+```bash
+python3 -m pip install scholarly pyyaml
+python3 bin/update_scholar_citations.py
+```

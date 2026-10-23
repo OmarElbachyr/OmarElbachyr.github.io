@@ -1,4 +1,9 @@
 /* Site-specific presentation; the theme and its back-to-top control stay intact. */
+:root {
+  --global-theme-color: #4c6a92;
+  --global-hover-color: #4c6a92;
+}
+
 footer[role="contentinfo"] {
   display: none !important;
 }
