@@ -103,8 +103,6 @@ Here we will give you some tips on how to customize the website. One important t
     - [How it integrates with analytics](#how-it-integrates-with-analytics)
     - [For developers](#for-developers)
   - [Automatic Google Scholar citation updates](#automatic-google-scholar-citation-updates)
-    - [Why is a PAT required?](#why-is-a-pat-required)
-    - [How to set up the PAT](#how-to-set-up-the-pat)
 
 <!--te-->
 
