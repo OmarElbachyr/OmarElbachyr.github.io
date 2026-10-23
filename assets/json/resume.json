@@ -44,7 +44,7 @@
     },
     {
       "name": "LëtzCross: A Cross-Lingual Page-Level Benchmark for Multimodal Retrieval over Luxembourgish Documents",
-      "publisher": "arXiv preprint arXiv:2608.21714",
+      "publisher": "International Conference on Language Technologies for Low-resource Languages (LaTeLL 2026, accepted)",
       "releaseDate": "2026",
       "url": "https://arxiv.org/abs/2608.21714",
       "summary": "LëtzCross evaluates cross-lingual retrieval over Luxembourgish PDF pages using queries in English, French, German, and Luxembourgish. The benchmark combines textual and visual questions to compare text-only and page-image retrievers, and investigates how single-language and multilingual fine-tuning transfer across query languages."

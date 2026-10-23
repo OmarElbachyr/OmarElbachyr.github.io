@@ -1,11 +1,14 @@
-"APSEC":
+"APSEC 2026":
   url: https://conf.researchr.org/track/apsec-2026/apsec-2026-tool-demonstration
 
 "arXiv":
   url: https://arxiv.org/
 
-"ICSE-SEIP":
+"ICSE-SEIP 2026":
   url: https://conf.researchr.org/track/icse-2026/icse-2026-software-engineering-in-practice
 
-"ISCRAM":
+"ISCRAM 2024":
   url: https://ojs.iscram.org/index.php/Proceedings
+
+"LaTeLL 2026":
+  url: https://latell.org/2026/
