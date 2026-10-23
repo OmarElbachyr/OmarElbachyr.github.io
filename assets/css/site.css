@@ -2,6 +2,116 @@
 :root {
   --global-theme-color: #4c6a92;
   --global-hover-color: #4c6a92;
+  --publication-text-color: #334155;
+  --publication-accent-color: #4c6a92;
+}
+
+html[data-theme="dark"] {
+  --publication-text-color: #e2e8f0;
+  --publication-accent-color: #a8bfdc;
+}
+
+/* Regular body text with restrained emphasis for headings and paper titles. */
+.post {
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.post h2,
+.post h3,
+.publications .title {
+  font-weight: 500;
+}
+
+/* Two-color publication palette: slate text and a muted blue author line. */
+.publications ol.bibliography li .title,
+.publications ol.bibliography li .title a,
+.publications ol.bibliography li .periodical,
+.publications ol.bibliography li .periodical em {
+  color: var(--publication-text-color);
+}
+
+.publications ol.bibliography li .title {
+  font-weight: 500;
+}
+
+.publications ol.bibliography li .author,
+.publications ol.bibliography li .author a,
+.publications ol.bibliography li .author > em {
+  color: var(--publication-accent-color);
+}
+
+.publications ol.bibliography li .periodical {
+  font-size: 0.9em;
+}
+
+.citation-summary {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.8rem;
+  align-items: center;
+  margin: 0.25rem 0 1.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--publication-accent-color) 24%, transparent);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--publication-accent-color) 7%, transparent);
+  color: var(--publication-text-color);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.citation-summary:hover {
+  border-color: var(--publication-accent-color);
+  background: color-mix(in srgb, var(--publication-accent-color) 11%, transparent);
+  color: var(--publication-text-color);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.citation-summary:focus-visible {
+  outline: 2px solid var(--publication-accent-color);
+  outline-offset: 3px;
+}
+
+.citation-summary__value {
+  grid-row: span 2;
+  color: var(--publication-accent-color);
+  font-size: 1.75rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.citation-summary__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.citation-summary__detail {
+  color: var(--publication-text-color);
+  font-size: 0.78rem;
+  opacity: 0.78;
+}
+
+/* The theme marks the site owner's name with emphasis in author lists. */
+.publications ol.bibliography li .author > em {
+  font-weight: 500;
+  font-style: normal;
+  border-bottom: 0;
+  text-decoration: none;
+}
+
+.profile .more-info {
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Start the publication list below the floated portrait and affiliation. */
+#selected-publications {
+  clear: both;
+  padding-top: 1rem;
 }
 
 footer[role="contentinfo"] {
