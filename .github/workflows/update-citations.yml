@@ -2,10 +2,7 @@ name: Update Google Scholar Citations
 
 on:
   schedule:
-    - cron: "0 8 * * 1" # Monday, 08:00 Luxembourg time
-      timezone: Europe/Luxembourg
-    - cron: "0 18 * * 5" # Friday, 18:00 Luxembourg time
-      timezone: Europe/Luxembourg
+    - cron: "23 * * * *" # Hourly, away from the busy start of the hour (UTC).
   workflow_dispatch:
 
 permissions:
@@ -33,31 +30,36 @@ jobs:
           python-version: "3.13"
 
       - name: Install citation dependencies
-        run: python -m pip install scholarly pyyaml
+        run: python -m pip install -r bin/scholar-requirements.txt
 
-      - name: Fetch citation counts from Google Scholar
-        run: timeout 180 python bin/update_scholar_citations.py
+      - name: Sync publications and citation counts from Google Scholar
+        run: timeout 480 python -u bin/update_scholar_citations.py
 
-      - name: Commit and push changed citation counts
+      - name: Commit and push changed publications and citation counts
         id: update
         run: |
-          git add -- _data/citations.yml
+          git add -- _data/citations.yml _bibliography/papers.bib
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "Google Scholar citation counts are unchanged." >> "$GITHUB_STEP_SUMMARY"
+            echo "Google Scholar publications and citation counts are unchanged." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: update Google Scholar citations"
+          git commit -m "chore: sync Google Scholar publications and citations"
           git push origin "HEAD:$GITHUB_REF_NAME"
           echo "changed=true" >> "$GITHUB_OUTPUT"
-          echo "Updated citation counts from Google Scholar." >> "$GITHUB_STEP_SUMMARY"
+          echo "Updated publications and citation counts from Google Scholar." >> "$GITHUB_STEP_SUMMARY"
 
       # GITHUB_TOKEN pushes do not trigger the push-based deployment workflow.
       - name: Rebuild the site with updated citation counts
-        if: steps.update.outputs.changed == 'true'
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: gh workflow run deploy.yml --ref "$GITHUB_REF_NAME"
+
+      - name: Explain failed synchronization
+        if: failure()
+        run: |
+          echo "Scholar synchronization failed. Check the failed step above. Google Scholar may block automated requests; a failed fetch keeps saved publications and counts intact. Retry with Run workflow. If the push or deployment step failed, check repository workflow permissions and branch rules." >> "$GITHUB_STEP_SUMMARY"

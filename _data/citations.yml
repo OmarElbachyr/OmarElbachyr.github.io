@@ -1,15 +1,23 @@
 metadata:
-  last_updated: '2026-10-22'
+  last_updated: '2026-10-27'
 papers:
   k9z_ASsAAAAJ:2osOgNQ5qMEC:
     citations: 1
-    title: "LëtzCross: A Cross-Lingual Page-Level Benchmark for Multimodal Retrieval over Luxembourgish Documents"
+    title: 'LëtzCross: A Cross-Lingual Page-Level Benchmark for Multimodal Retrieval over Luxembourgish Documents'
+    year: '2026'
+  k9z_ASsAAAAJ:UeHWp8X0CEIC:
+    citations: 0
+    title: 'VisR-RAG-Fin: Benchmarking Multimodal RAG over Visually Rich Financial Documents'
     year: '2026'
   k9z_ASsAAAAJ:d1gkVwhDpl0C:
-    citations: 2
-    title: "Empirical Evaluation of PDF Parsing and Chunking for Financial Question Answering with RAG"
+    citations: 4
+    title: Empirical Evaluation of PDF Parsing and Chunking for Financial Question Answering with RAG
+    year: '2026'
+  k9z_ASsAAAAJ:qjMakFHDy7sC:
+    citations: 0
+    title: 'RAGit: Turning Document Preprocessing into an Experimental Variable for RAG'
     year: '2026'
   k9z_ASsAAAAJ:u-x6o8ySG0sC:
     citations: 2
-    title: "M-CATNAT: A Multimodal dataset to analyze French tweets during natural disasters"
+    title: 'M-CATNAT: A Multimodal dataset to analyze French tweets during natural disasters'
     year: '2024'

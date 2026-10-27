@@ -296,7 +296,7 @@ Build and deployment:
 
 - `deploy.yml`: builds the site and deploys it to GitHub Pages (the `gh-pages` branch)
 - `render-cv.yml`: regenerates your CV PDF with [RenderCV](https://github.com/rendercv/rendercv) when `_data/cv.yml` or the files under `assets/rendercv/` change
-- `update-citations.yml`: runs `bin/update_scholar_citations.py` on a schedule to refresh `_data/citations.yml` with Google Scholar citation counts. See [Automatic Google Scholar citation updates](CUSTOMIZE.md#automatic-google-scholar-citation-updates)
+- `update-citations.yml`: runs `bin/update_scholar_citations.py` hourly to import new Google Scholar publications and refresh citation counts. See [Automatic Google Scholar citation updates](CUSTOMIZE.md#automatic-google-scholar-citation-updates)
 - `update-tocs.yml`: regenerates the `<!--ts-->…<!--te-->` table of contents blocks in changed Markdown files
 
 - [Frequently Asked Questions](#frequently-asked-questions)

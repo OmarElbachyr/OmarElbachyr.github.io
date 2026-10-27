@@ -1577,17 +1577,19 @@ For more API details, see [Vanilla Cookie Consent documentation](https://cookiec
 
 ## Automatic Google Scholar citation updates
 
-The [citation workflow](../.github/workflows/update-citations.yml) checks the Scholar profile configured in [`_data/socials.yml`](../_data/socials.yml) on **Monday at 08:00** and **Friday at 18:00**, using the `Europe/Luxembourg` timezone. GitHub follows Luxembourg's clock changes; scheduled jobs may start late. The workflow must be on the default branch with GitHub Actions enabled.
+The [citation workflow](../.github/workflows/update-citations.yml) checks the public Scholar profile configured in [`_data/socials.yml`](../_data/socials.yml) **hourly, at minute 23**. This is polling rather than a live subscription. Scheduled jobs may start late or be dropped during heavy GitHub Actions load. The workflow must be on the default branch with GitHub Actions enabled; GitHub can disable schedules in public repositories after 60 days without repository activity.
 
-The updater reads per-paper citation counts from Google Scholar. Changed data is saved to [`_data/citations.yml`](../_data/citations.yml), committed by the workflow, and deployed by explicitly dispatching `deploy.yml`. This uses the built-in `GITHUB_TOKEN` with `contents: write` and `actions: write`; no personal access token is needed. Repository rules must permit the workflow to push to the branch. See [GitHub's workflow-trigger documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
+The updater reads per-paper citation counts from Google Scholar and imports new publications into [`_bibliography/papers.bib`](../_bibliography/papers.bib). Existing papers are matched by Scholar ID or normalized full title. A title match adds a missing Scholar ID while preserving curated fields, including abstracts, code, videos, venue labels, and selection. New papers receive full metadata available on Scholar, a stable key based on their Scholar ID, and `selected = {true}` so they appear in the site's selected publications too. Existing papers are never automatically deleted or rewritten; resolve title changes or merged Scholar IDs manually if they cannot be matched. New paper details are fetched only once, to reduce requests.
 
-Failed, empty, or malformed responses leave saved counts untouched and fail the workflow visibly. Scholar can block automated requests. Retry through **Actions → Update Google Scholar Citations → Run workflow**; manual reruns always fetch fresh data. Unchanged results do not create commits or rebuilds.
+Changed bibliography and citation data are committed together by the workflow, then deployed by explicitly dispatching `deploy.yml`. This uses the built-in `GITHUB_TOKEN` with `contents: write` and `actions: write`; no personal access token is needed. Repository rules must permit the workflow to push to the branch. See [GitHub's workflow-trigger documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow).
 
-Each visible citation badge requires the matching `google_scholar_id` in [`_bibliography/papers.bib`](../_bibliography/papers.bib). The updater does not estimate missing counts, import paper metadata, or change publication selection and buttons.
+Failed, empty, or malformed responses leave saved files untouched and fail the workflow visibly. Scholar can block automated requests; this integration uses the unofficial `scholarly` client and cannot guarantee uninterrupted access. Retry through **Actions → Update Google Scholar Citations → Run workflow**; manual reruns always fetch fresh data and request a deployment, even if the data is unchanged, to recover from a failed deployment dispatch. Unchanged scheduled runs do not create commits or rebuilds. The workflow summary indicates when fetching, pushing, or dispatching deployment fails.
+
+Each visible citation badge requires a matching `google_scholar_id` in the bibliography; the importer supplies this for matched and new papers. The updater does not estimate missing counts. The public profile URL and ID are sufficient; do not supply Google credentials or the account-specific `authuser` query parameter.
 
 For a local check:
 
 ```bash
-python3 -m pip install scholarly pyyaml
+python3 -m pip install -r bin/scholar-requirements.txt
 python3 bin/update_scholar_citations.py
 ```
