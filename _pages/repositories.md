@@ -8,8 +8,6 @@ nav_order: 3
 published: true
 ---
 
-<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
-
 {% if site.data.repositories.github_users %}
 
 ## GitHub users

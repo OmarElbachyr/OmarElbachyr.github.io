@@ -20,8 +20,6 @@ latest_posts:
   enabled: false
 ---
 
-<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
-
 I work in the [TruX Research Group](https://www.uni.lu/snt-en/research-groups/trux/), supervised by [Prof. Jacques Klein]({{ site.data.coauthors.klein[0].url }}), with guidance from [Prof. Tegawendé F. Bissyandé]({{ site.data.coauthors.bissyande[0].url }}) and [Prof. Saad Ezzini]({{ site.data.coauthors.ezzini[0].url }}), in collaboration with BGL BNP Paribas.
 
 My research focuses on information retrieval (IR), multimodal document understanding, and retrieval-augmented generation (RAG) over visually rich documents.

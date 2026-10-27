@@ -7,8 +7,6 @@ nav: true
 nav_order: 2
 ---
 
-<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
-
 <!-- _pages/publications.md -->
 
 {% assign total_citations = 0 %}

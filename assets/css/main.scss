@@ -1,0 +1,28 @@
+---
+---
+
+// Site-owned entry point: reuse the gem's partials and load our styles before paint.
+// Keep the partial list aligned with al_folio_core's assets/css/main.scss.
+@charset "utf-8";
+
+@use "sass:math";
+@use "sass:string";
+@use "variables" with (
+  $max-content-width: {{site.max_width | default: "930px"}}
+);
+
+@use "themes";
+@use "layout";
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+// Compile the custom palette and publication styling into the head stylesheet.
+@use "site.css";
