@@ -12,7 +12,6 @@ Here are some frequently asked questions. If you have a different question, plea
   - [Atom feed doesn't work. Why?](#atom-feed-doesnt-work-why)
   - [My site doesn't work when I enable related_blog_posts. Why?](#my-site-doesnt-work-when-i-enable-related_blog_posts-why)
   - [When trying to deploy, it's asking for github login credentials, which github disabled password authentication and it exits with an error. How to fix?](#when-trying-to-deploy-its-asking-for-github-login-credentials-which-github-disabled-password-authentication-and-it-exits-with-an-error-how-to-fix)
-  - [When I manually run the Lighthouse Badger workflow, it fails with Error: Input required and not supplied: token. How do I fix that?](#when-i-manually-run-the-lighthouse-badger-workflow-it-fails-with-error-input-required-and-not-supplied-token-how-do-i-fix-that)
   - [My code runs fine locally, but when I create a commit and submit it, it fails with prettier code formatter workflow run failed for main branch. How do I fix that?](#my-code-runs-fine-locally-but-when-i-create-a-commit-and-submit-it-it-fails-with-prettier-code-formatter-workflow-run-failed-for-main-branch-how-do-i-fix-that)
   - [After I update my site with some new content, even a small change, the GitHub action throws an error or displays a warning. What happened?](#after-i-update-my-site-with-some-new-content-even-a-small-change-the-github-action-throws-an-error-or-displays-a-warning-what-happened)
   - [How do I upgrade from al-folio v1.0 to v1.1+ with minimal friction?](#how-do-i-upgrade-from-al-folio-v10-to-v11-with-minimal-friction)
@@ -68,10 +67,6 @@ This is probably due to the [classifier reborn](https://github.com/jekyll/classi
 ## When trying to deploy, it's asking for github login credentials, which github disabled password authentication and it exits with an error. How to fix?
 
 Open .git/config file using your preferred editor. Change the `https` portion of the `url` variable to `ssh`. Try deploying again.
-
-## When I manually run the Lighthouse Badger workflow, it fails with `Error: Input required and not supplied: token`. How do I fix that?
-
-You need to [create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) and [add it as a secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-encrypted-secrets-for-a-repository) named `LIGHTHOUSE_BADGER_TOKEN` to your repository. For more information, check [lighthouse-badger documentation](https://github.com/MyActionWay/lighthouse-badger-workflows#lighthouse-badger-easyyml) on how to do this.
 
 ## My code runs fine locally, but when I create a commit and submit it, it fails with `prettier code formatter workflow run failed for main branch`. How do I fix that?
 
@@ -307,7 +302,6 @@ Build and deployment:
   - [Atom feed doesn't work. Why?](#atom-feed-doesnt-work-why)
   - [My site doesn't work when I enable related_blog_posts. Why?](#my-site-doesnt-work-when-i-enable-related_blog_posts-why)
   - [When trying to deploy, it's asking for github login credentials, which github disabled password authentication and it exits with an error. How to fix?](#when-trying-to-deploy-its-asking-for-github-login-credentials-which-github-disabled-password-authentication-and-it-exits-with-an-error-how-to-fix)
-  - [When I manually run the Lighthouse Badger workflow, it fails with Error: Input required and not supplied: token. How do I fix that?](#when-i-manually-run-the-lighthouse-badger-workflow-it-fails-with-error-input-required-and-not-supplied-token-how-do-i-fix-that)
   - [My code runs fine locally, but when I create a commit and submit it, it fails with prettier code formatter workflow run failed for main branch. How do I fix that?](#my-code-runs-fine-locally-but-when-i-create-a-commit-and-submit-it-it-fails-with-prettier-code-formatter-workflow-run-failed-for-main-branch-how-do-i-fix-that)
   - [After I update my site with some new content, even a small change, the GitHub action throws an error or displays a warning. What happened?](#after-i-update-my-site-with-some-new-content-even-a-small-change-the-github-action-throws-an-error-or-displays-a-warning-what-happened)
   - [How do I upgrade from al-folio v1.0 to v1.1+ with minimal friction?](#how-do-i-upgrade-from-al-folio-v10-to-v11-with-minimal-friction)

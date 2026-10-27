@@ -88,8 +88,6 @@ Here we will give you some tips on how to customize the website. One important t
     - [Removing the publications page](#removing-the-publications-page)
     - [Removing the repositories page](#removing-the-repositories-page)
     - [You can also remove pages through commenting out front-matter blocks](#you-can-also-remove-pages-through-commenting-out-front-matter-blocks)
-  - [Adding Token for Lighthouse Badger](#adding-token-for-lighthouse-badger)
-    - [Personal Access Token (fine-grained) Permissions for Lighthouse Badger:](#personal-access-token-fine-grained-permissions-for-lighthouse-badger)
   - [Customizing fonts, spacing, and more](#customizing-fonts-spacing-and-more)
   - [Scheduled Posts](#scheduled-posts)
     - [Name Format](#name-format)
@@ -319,7 +317,6 @@ Understanding al-folio's technology stack will help you better customize and ext
   - **Link checking**: Validates that all links in your site are not broken
   - **Code formatting**: Ensures code follows the Prettier code style
   - **Accessibility testing**: Checks for accessibility issues using Axe
-  - **Lighthouse**: Measures site performance and best practices
   - **Citation updates**: Automatically fetches citation counts from Google Scholar
 
 - **GitHub Pages**: Free hosting for your static website built by Jekyll
@@ -1397,19 +1394,6 @@ collection: books
 
 ## Books that I am reading, have read, or will read
 ```
-
-## Adding Token for Lighthouse Badger
-
-To add secrets for [lighthouse-badger](https://github.com/alshedivat/al-folio/actions/workflows/lighthouse-badger.yml), create a [personal access token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token) and add it as a [secret](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-encrypted-secrets-for-a-repository) named `LIGHTHOUSE_BADGER_TOKEN` to your repository. The [lighthouse-badger documentation](https://github.com/MyActionWay/lighthouse-badger-workflows#lighthouse-badger-easyyml) specifies using an environment variable, but using it as a secret is more secure and appropriate for a PAT.
-
-Also In case you face the error: "Input required and not supplied: token" in the Lighthouse Badger action, this solution resolves it.
-
-### Personal Access Token (fine-grained) Permissions for Lighthouse Badger:
-
-- **contents**: access: read and write
-- **metadata**: access: read-only
-
-Due to the necessary permissions (PAT and others mentioned above), it is recommended to use it as a secret rather than an environment variable.
 
 ## Customizing fonts, spacing, and more
 
