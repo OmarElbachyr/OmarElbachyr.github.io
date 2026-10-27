@@ -6,6 +6,20 @@
   bibtex_show = {true},
 }
 
+@inproceedings{scholar_UeHWp8X0CEIC,
+ abbr = {SIGIR-AP 2026},
+ abstract = {VisR-RAG-Fin introduces an open-source benchmark for page-level question answering over visually rich financial documents, preserving their layout and visual content. An empirical study compares text-only, multimodal, and hybrid retrieval and generation configurations to guide the design and evaluation of multimodal RAG systems.},
+ author = {El Bachyr, Omar and Bernardy, Laura Maria and Ezzini, Saad and Klein, Jacques and Bissyandé, Tegawendé F. and Monté, Charles and Zilali, Anas and Ble, Ulrick and Goujon, Anne},
+ google_scholar_id = {UeHWp8X0CEIC},
+ arxiv = {2610.24822},
+ code = {https://github.com/OmarElbachyr/VisR-RAG-Fin},
+ html = {https://arxiv.org/abs/2610.24822},
+ booktitle = {4th International ACM SIGIR Conference on Information Retrieval in the Asia Pacific (SIGIR-AP), Main Research Track},
+ selected = {true},
+ title = {{VisR-RAG-Fin: Benchmarking Multimodal RAG over Visually Rich Financial Documents}},
+ year = {2026}
+}
+
 @inproceedings{elbachyr2026ragit,
   google_scholar_id = {qjMakFHDy7sC},
   abbr        = {APSEC 2026},
@@ -13,7 +27,7 @@
   author      = {El Bachyr, Omar and Ezzini, Saad and Bissyandé, Tegawendé F. and Klein, Jacques},
   booktitle   = {33rd Asia-Pacific Software Engineering Conference (APSEC), Tool Demonstration Track},
   year        = {2026},
-  abstract    = {RAGit is an open-source workbench for comparing document preprocessing choices in retrieval-augmented generation. Configurable parsing, chunking, indexing, retrieval, and evaluation stages support controlled experiments, reusable artifacts, and a shared page-level evaluation across different retrieval units.},
+  abstract    = {RAGit is an open-source workbench for reproducible evaluation of document preprocessing through downstream retrieval. It supports configurable parsing and chunking, reusable experiment artifacts, and dense and late-interaction retrieval, mapping different retrieval units to a common page-level ranking for controlled comparisons.},
   arxiv       = {2610.24659},
   code        = {https://github.com/OmarElbachyr/ragit},
   video       = {https://www.youtube-nocookie.com/embed/tsst-Bhfz4I},
@@ -27,7 +41,7 @@
   booktitle         = {International Conference on Language Technologies for Low-resource Languages (LaTeLL)},
   year              = {2026},
   month             = {September},
-  abstract          = {LëtzCross evaluates cross-lingual retrieval over Luxembourgish PDF pages using queries in English, French, German, and Luxembourgish. The benchmark combines textual and visual questions to compare text-only and page-image retrievers, and investigates how single-language and multilingual fine-tuning transfer across query languages.},
+  abstract          = {LëtzCross benchmarks cross-lingual page-level retrieval over Luxembourgish PDFs using queries in four languages. Page-image retrievers outperform OCR-based text-only retrievers in the system-level comparison. Fine-tuning transfers across languages, with multilingual training that includes Luxembourgish producing the strongest results on Luxembourgish queries.},
   doi               = {10.48550/arXiv.2608.21714},
   arxiv             = {2608.21714},
   code              = {https://github.com/OmarElbachyr/letzcross-benchmark},
@@ -43,7 +57,7 @@
   pages             = {728--739},
   year              = {2026},
   publisher         = {Association for Computing Machinery},
-  abstract          = {This study examines how PDF parsing and chunking choices affect retrieval-augmented question answering over financial documents. Experiments on two benchmarks, including the newly introduced TableQuest dataset, compare parsers, chunking strategies, and overlap settings to guide the design of document-processing pipelines.},
+  abstract          = {This study evaluates how PDF parsing, chunking, and overlap affect RAG-based question answering on two financial benchmarks, including the newly introduced TableQuest. The results provide practical guidance on preserving document structure and improving answer correctness in PDF-processing pipelines.},
   doi               = {10.1145/3786583.3786911},
   arxiv             = {2604.12047},
   code              = {https://github.com/OmarElbachyr/finqa-tablequest-bench},
@@ -59,19 +73,8 @@
   volume            = {21},
   year              = {2024},
   month             = {May},
-  abstract          = {M-CATNAT introduces a French-language dataset for multimodal analysis of natural-disaster tweets. Its annotation approach treats tweet text, images, and their combination separately, extending crisis-management resources beyond English and supporting automated analysis of social media during disasters.},
+  abstract          = {M-CATNAT presents a French multimodal dataset annotation effort for natural-disaster tweets, following CrisisMMD guidelines. Separate annotations for text, images, and their combination address gaps in multilingual and multimodal crisis resources, with a target of 1,430 tweets and over 4,500 labels.},
   doi               = {10.59297/yhq8bb90},
   google_scholar_id = {u-x6o8ySG0sC},
   selected          = {true}
-}
-
-@article{scholar_UeHWp8X0CEIC,
- abstract = {Enterprise documents such as financial reports are increasingly processed by automated systems, yet they are primarily designed for human reading and exhibit complex visual structure, combining dense text with tables, charts, diagrams, and rich layouts. These characteristics pose significant challenges for Retrieval-Augmented Generation (RAG) systems, which must retrieve relevant pages and leverage visual and structural information during answer generation. Despite recent advances in multimodal retrieval and vision-language models, there remains a limited understanding of how design choices across retrieval and generation components affect end-to-end RAG performance on visually rich documents. In this paper, we present a comprehensive empirical study of multimodal RAG for page-level Question Answering (QA) over financial documents. We introduce VisR-RAG-Fin (Visually Rich RAG for Finance), an open-source benchmark constructed through a general pipeline for visually rich documents that preserves original layout and visual content. Using this benchmark, we systematically analyze retrieval and generation behavior under text-only, multimodal, and hybrid configurations, providing a foundation for rigorous evaluation of RAG systems on complex enterprise document collections. Overall, this work provides actionable insights for practitioners designing and evaluating multimodal RAG pipelines over complex, visually rich enterprise documents.},
- author = {Omar El Bachyr and Laura Maria Bernardy and Saad Ezzini and Jacques Klein and Tegawendé F Bissyandé and Charles Mont'e and Anas Zilali and Ulrick Ble and Anne Goujon},
- google_scholar_id = {UeHWp8X0CEIC},
- html = {https://arxiv.org/abs/2610.24822},
- journal = {arXiv preprint arXiv:2610.24822},
- selected = {true},
- title = {{VisR-RAG-Fin: Benchmarking Multimodal RAG over Visually Rich Financial Documents}},
- year = {2026}
 }

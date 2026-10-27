@@ -32,3 +32,23 @@ philippy:
       - Fred
       - F.
     url: https://philippyfred.com/
+monte:
+  - firstname:
+      - Charles
+      - C.
+    url: https://www.linkedin.com/in/charles-monte/
+zilali:
+  - firstname:
+      - Anas
+      - A.
+    url: https://www.linkedin.com/in/anas-zilali/
+ble:
+  - firstname:
+      - Ulrick
+      - U.
+    url: https://www.linkedin.com/in/ulrick-ble-ba980a1ab/
+goujon:
+  - firstname:
+      - Anne
+      - A.
+    url: https://www.linkedin.com/in/anne-goujon-751a80b/
