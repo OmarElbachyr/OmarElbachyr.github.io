@@ -47,7 +47,8 @@ html[data-theme="dark"] {
 
 .publications ol.bibliography li .author,
 .publications ol.bibliography li .author a,
-.publications ol.bibliography li .author > em {
+.publications ol.bibliography li .author > em,
+.publications ol.bibliography li .author > span.more-authors {
   color: var(--publication-accent-color);
 }
 
