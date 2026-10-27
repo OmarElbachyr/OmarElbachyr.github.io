@@ -23,6 +23,16 @@ html[data-theme="dark"] {
   font-weight: 500;
 }
 
+/* Keep Research body copy lighter than its compact headings. */
+.post:has(.research-page) {
+  font-weight: 300;
+}
+
+.research-page h5,
+.research-page h6 {
+  font-weight: 400;
+}
+
 /* Two-color publication palette: slate text and a muted blue author line. */
 .publications ol.bibliography li .title,
 .publications ol.bibliography li .title a,

@@ -4,7 +4,7 @@ permalink: /repositories/
 title: Repositories
 description: Research code and benchmarks on GitHub.
 nav: true
-nav_order: 3
+nav_order: 4
 published: true
 ---
 
