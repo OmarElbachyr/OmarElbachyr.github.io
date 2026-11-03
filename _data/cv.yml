@@ -1,12 +1,9 @@
 cv:
   name: Omar El Bachyr
-  label: PhD Researcher
+  headline: PhD Researcher
   email: omar.elbachyr@uni.lu
   location: Luxembourg
   website: https://omarelbachyr.github.io
-  summary:
-    PhD Researcher at the University of Luxembourg, working on information retrieval, multimodal retrieval, visually rich documents, retrieval-augmented
-    generation, and multilingual information retrieval.
   social_networks:
     - network: GitHub
       username: OmarElbachyr
